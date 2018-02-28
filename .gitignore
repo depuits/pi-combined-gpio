@@ -1,0 +1,6 @@
+# Dependency directories
+node_modules/
+
+
+# ignore all config files except the default
+config/

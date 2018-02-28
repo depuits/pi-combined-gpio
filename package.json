@@ -1,0 +1,25 @@
+{
+  "name": "pi-combined-gpio",
+  "version": "1.0.0",
+  "description": "Raspberry pi project combining gpio project to run in a single instance.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/depuits/pi-combined-gpio.git"
+  },
+  "author": "depuits",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/depuits/pi-combined-gpio/issues"
+  },
+  "homepage": "https://github.com/depuits/pi-combined-gpio#readme",
+  "dependencies": {
+    "config": "^1.30.0",
+    "pi-mqtt-led": "depuits/pi-mqtt-led",
+    "pigpio-dht": "^1.1.0"
+  }
+}
