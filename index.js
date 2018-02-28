@@ -16,6 +16,7 @@ sensor.on('badChecksum', () => {
 	console.log('checksum failed');
 });
 
-setInterval(() => { 
+sensor.read();
+setInterval(() => {
 	sensor.read();
 }, dhtConf.pollInterval);
