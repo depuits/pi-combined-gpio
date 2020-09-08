@@ -44,8 +44,8 @@ var config = {
 		mqttTopicSet: 'home/PI_THERMO/set',
 		pin: 23,
 		
-		stateOff: 'off',
-		stateOn: 'on'
+		stateOff: 'OFF',
+		stateOn: 'ON'
 	}
 
 };

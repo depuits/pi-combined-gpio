@@ -42,13 +42,13 @@ mqttClient.on('connect', function () {
 
 mqttClient.on('message', function (topic, message) {
 	if (topic === thermoConf.mqttTopicSet) {
-		console.log('rec topic: ' + message);
+		console.log('rec thermo topic: ' + message);
 
-		if (message === thermoConf.stateOn)
+		if (message == thermoConf.stateOn)
 		{
 			thermo.digitalWrite(1);
 		}
-		else if (message === thermoConf.stateOff)
+		else if (message == thermoConf.stateOff)
 		{
 			thermo.digitalWrite(0);
 		}
