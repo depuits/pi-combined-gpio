@@ -37,7 +37,17 @@ var config = {
 		type: 22,
 		mqttTopic: 'home/sensor/dht',
 		pollInterval: 30 * 1000 // every 30 seconds, can't be more then every 2 seconds
+	},
+
+	thermostat: {
+		mqttTopicState: 'home/PI_THERMO',
+		mqttTopicSet: 'home/PI_THERMO/set',
+		pin: 23,
+		
+		stateOff: 'off',
+		stateOn: 'on'
 	}
+
 };
 
 module.exports = config;
