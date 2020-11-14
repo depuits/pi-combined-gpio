@@ -24,36 +24,61 @@ setInterval(() => {
 	sensor.read();
 }, dhtConf.pollInterval);
 
-// Thermostat setup
+
+
+// extras setup
 const Gpio = require('pigpio').Gpio;
-const thermoConf = config.get('thermostat');
-const thermo = new Gpio(thermoConf.pin, {mode: Gpio.OUTPUT});
+const extraConfs = config.get('extras');
 
-function sendThermoState()
-{
-	mqttClient.publish(thermoConf.mqttTopicState, thermo.digitalRead() ? thermoConf.stateOn : thermoConf.stateOff, { retain: true });
-}
+for (let extra of extraConfs) {
 
-mqttClient.on('connect', function () {
-	mqttClient.subscribe(thermoConf.mqttTopicSet);
-	thermo.digitalWrite(0); // make sure the thermostat is off
-	sendThermoState(); //make sure the current state is know when connected
-});
+	const conf = config.get('extras');
+	const gpio = new Gpio(conf.pin, {mode: Gpio.OUTPUT});
 
-mqttClient.on('message', function (topic, message) {
-	if (topic === thermoConf.mqttTopicSet) {
-		console.log('rec thermo topic: ' + message);
+	const onState = conf.inverted ? 0 : 1;
+	const offState = conf.inverted ? 1 : 0;
 
-		if (message == thermoConf.stateOn)
-		{
-			thermo.digitalWrite(1);
-		}
-		else if (message == thermoConf.stateOff)
-		{
-			thermo.digitalWrite(0);
-		}
 
-		sendThermoState();
+	function sendState()
+	{
+		mqttClient.publish(conf.mqttTopicState, gpio.digitalRead() == onState ? conf.stateOn : conf.stateOff, { retain: true });
 	}
-});
+
+	function set(on) {
+
+		if (message == conf.stateOn)
+		{
+			gpio.digitalWrite(onState);
+		}
+		else if (message == conf.stateOff)
+		{
+			gpio.digitalWrite(offState);
+		}
+
+		sendState();
+	}
+
+	mqttClient.on('connect', function () {
+		mqttClient.subscribe(conf.mqttTopicSet);
+		set(false); // make sure the  is off
+	});
+
+	mqttClient.on('message', function (topic, message) {
+		if (topic === conf.mqttTopicSet) {
+			console.log('rec extra topic: ' + message);
+
+			if (message == conf.stateOn)
+			{
+				set(true);
+			}
+			else if (message == conf.stateOff)
+			{
+				set(false);
+			}
+
+			sendState();
+		}
+	});
+
+}
 

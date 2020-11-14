@@ -39,14 +39,25 @@ var config = {
 		pollInterval: 30 * 1000 // every 30 seconds, can't be more then every 2 seconds
 	},
 
-	thermostat: {
-		mqttTopicState: 'home/PI_THERMO',
-		mqttTopicSet: 'home/PI_THERMO/set',
-		pin: 23,
-		
-		stateOff: 'OFF',
-		stateOn: 'ON'
-	}
+	extras: [{
+			mqttTopicState: 'home/PI_THERMO',
+			mqttTopicSet: 'home/PI_THERMO/set',
+			pin: 23,
+			
+			inverted: true,
+			stateOff: 'OFF',
+			stateOn: 'ON'
+		}, 
+		{
+			mqttTopicState: 'home/PI_THERMO2',
+			mqttTopicSet: 'home/PI_THERMO2/set',
+			pin: 3,
+			
+			inverted: true,
+			stateOff: 'OFF',
+			stateOn: 'ON'
+		}
+	]
 
 };
 
