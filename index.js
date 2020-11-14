@@ -32,7 +32,7 @@ const extraConfs = config.get('extras');
 
 for (let extra of extraConfs) {
 
-	const conf = config.get('extras');
+	const conf = extra;
 	const gpio = new Gpio(conf.pin, {mode: Gpio.OUTPUT});
 
 	const onState = conf.inverted ? 0 : 1;
