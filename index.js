@@ -45,12 +45,11 @@ for (let extra of extraConfs) {
 	}
 
 	function set(on) {
-
-		if (message == conf.stateOn)
+		if (on)
 		{
 			gpio.digitalWrite(onState);
 		}
-		else if (message == conf.stateOff)
+		else
 		{
 			gpio.digitalWrite(offState);
 		}
