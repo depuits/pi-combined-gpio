@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/depuits/pi-combined-gpio#readme",
   "dependencies": {
-    "config": "^3.0.1",
+    "config": "^3.3.8",
     "pi-mqtt-led": "github:depuits/pi-mqtt-led",
     "pigpio-dht": "^1.1.1"
   }
